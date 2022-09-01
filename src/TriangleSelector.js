@@ -6,7 +6,7 @@ function TriangleSelector() {
       <div className="triangle" />
       <div className="triangle-border" />
       <div className="triangle-selector" />
-      <div className="triangle-selector-border" />
+      {/* <div className="triangle-selector-border" /> */}
     </>
   );
 }

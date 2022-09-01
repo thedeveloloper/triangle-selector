@@ -63,15 +63,8 @@
   width: 1.1em;
   height: 1.1em;
   border-radius: 9999px;
-  background-color: #ffffff;
-  text-align: left;
-}
-
-.triangle-selector-border {
-  position: absolute;
-  width: 1em;
-  height: 1em;
-  border-radius: 9999px;
   background-color: #282c34;
   text-align: left;
+  border: 0.1em solid;
+  border-color: #ffffff;
 }
