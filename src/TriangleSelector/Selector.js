@@ -1,9 +1,12 @@
-import { useRef, useState } from "react";
-import { pointInTriangle } from "./math";
+import { useContext, useRef, useState } from "react";
+import { distanceToLine, pointInTriangle, sigmoid } from "./math";
 import "./Selector.css";
+import { TriangleSelectorContext } from "./TriangleSelectorContext";
 
 function Selector({ ...props }) {
   const { points, offset } = props;
+
+  const { setValues } = useContext(TriangleSelectorContext);
 
   const [position, setPosition] = useState({
     x: offset.x,
@@ -25,14 +28,19 @@ function Selector({ ...props }) {
         xOffset: position.x - xDiff - offset.x,
         yOffset: position.y - yDiff - offset.y,
       };
-      console.log({
-        x: mouseLocation.xOffset,
-        y: mouseLocation.yOffset,
-        inTriangle: pointInTriangle(...points, {
-          x: mouseLocation.x,
-          y: mouseLocation.y,
-        }),
+
+      setValues({
+        a: Math.round(
+          sigmoid(distanceToLine(points[0], points[1], position), 0, 500) * 100
+        ),
+        b: Math.round(
+          sigmoid(distanceToLine(points[1], points[2], position), 0, 500) * 100
+        ),
+        c: Math.round(
+          sigmoid(distanceToLine(points[2], points[0], position), 0, 500) * 100
+        ),
       });
+
       return mouseLocation;
     });
   });
@@ -61,7 +69,7 @@ function Selector({ ...props }) {
       <circle
         cx={position.x}
         cy={position.y}
-        r={25}
+        r={15}
         fill="grey"
         stroke="grey"
         strokeWidth="1"

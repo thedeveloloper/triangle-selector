@@ -1,9 +1,5 @@
-.svg-triangle {
-  /*   border: 1px solid gray; */
-}
-
 .svg-triangle path {
-  stroke-width: 20;
+  stroke-width: 10;
   stroke: grey;
   stroke-linejoin: round;
   stroke-linecap: round;

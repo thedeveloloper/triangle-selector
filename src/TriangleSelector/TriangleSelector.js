@@ -1,6 +1,7 @@
 import { calculateMidpoint } from "./math";
 import Selector from "./Selector";
 import Triangle from "./Triangle";
+import { TriangleSelectorContextProvider } from "./TriangleSelectorContext";
 
 function TriangleSelector() {
   const scale = 5;
@@ -22,12 +23,12 @@ function TriangleSelector() {
     midpoints.push({ x: midpoint[0], y: midpoint[1] });
   }
 
-  console.log(midpoints);
-
   return (
-    <Triangle points={points} midpoints={midpoints}>
-      <Selector points={points} offset={offset} />
-    </Triangle>
+    <TriangleSelectorContextProvider>
+      <Triangle points={points} midpoints={midpoints}>
+        <Selector points={points} offset={offset} />
+      </Triangle>
+    </TriangleSelectorContextProvider>
   );
 }
 

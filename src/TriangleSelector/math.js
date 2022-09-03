@@ -14,4 +14,16 @@ function pointInTriangle(a, b, c, p) {
   return w1 >= 0 && w2 >= 0 && w1 + w2 <= 1;
 }
 
-export { calculateMidpoint, pointInTriangle };
+function sigmoid(value, min = 0, max = 100) {
+  return (value - min) / (max - min);
+}
+
+function distanceToLine(a, b, p) {
+  const s1 = -b.y + a.y;
+  const s2 = b.x - a.x;
+  return (
+    Math.abs((p.x - a.x) * s1 + (p.y - a.y) * s2) / Math.sqrt(s1 * s1 + s2 * s2)
+  );
+}
+
+export { calculateMidpoint, pointInTriangle, distanceToLine, sigmoid };
