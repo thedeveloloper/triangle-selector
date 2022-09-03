@@ -1,8 +1,11 @@
 import { useRef, useState } from "react";
+import { pointInTriangle } from "./math";
 import "./Selector.css";
 
-function Selector() {
+function Selector({ ...props }) {
   const [position, setPosition] = useState({ x: 50, y: 50, coords: {} });
+
+  const { points, midpoints } = props;
 
   const offset = [100, 125];
 
@@ -20,7 +23,14 @@ function Selector() {
         xOffset: position.x - xDiff - offset[0],
         yOffset: position.y - yDiff - offset[1],
       };
-      console.log(mouseLocation);
+      console.log({
+        x: mouseLocation.xOffset,
+        y: mouseLocation.yOffset,
+        inTriangle: pointInTriangle(...points, {
+          x: mouseLocation.x,
+          y: mouseLocation.y,
+        }),
+      });
       return mouseLocation;
     });
   });
