@@ -1,5 +1,4 @@
-import "./App.css";
-import TriangleSelector from "./TriangleSelector";
+import TriangleSelector from "./TriangleSelector/TriangleSelector";
 
 function App() {
   return (
