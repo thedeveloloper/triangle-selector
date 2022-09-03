@@ -1,3 +1,4 @@
+import sigmoid from "./sigmoid.ts";
 import "./TriangleSelector.css";
 
 function TriangleSelector() {
