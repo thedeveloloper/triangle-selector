@@ -1,6 +1,8 @@
+import sigmoid from "./sigmoid.ts";
 import "./TriangleSelector.css";
 
 function TriangleSelector() {
+  console.log(sigmoid(0.5, 0, 0.86));
   return (
     <>
       <div className="triangle" />
