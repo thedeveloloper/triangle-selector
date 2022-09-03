@@ -3,11 +3,13 @@ import { pointInTriangle } from "./math";
 import "./Selector.css";
 
 function Selector({ ...props }) {
-  const [position, setPosition] = useState({ x: 50, y: 50, coords: {} });
+  const { points, offset } = props;
 
-  const { points, midpoints } = props;
-
-  const offset = [100, 125];
+  const [position, setPosition] = useState({
+    x: offset.x,
+    y: offset.y,
+    coords: {},
+  });
 
   const handleMouseMove = useRef((e) => {
     setPosition((position) => {
@@ -20,8 +22,8 @@ function Selector({ ...props }) {
           x: e.pageX,
           y: e.pageY,
         },
-        xOffset: position.x - xDiff - offset[0],
-        yOffset: position.y - yDiff - offset[1],
+        xOffset: position.x - xDiff - offset.x,
+        yOffset: position.y - yDiff - offset.y,
       };
       console.log({
         x: mouseLocation.xOffset,

@@ -4,14 +4,14 @@ import Triangle from "./Triangle";
 
 function TriangleSelector() {
   const scale = 5;
-  const offset = [100, 125];
+  const offset = { x: 100, y: 125 };
   const points = [
     { x: 0, y: 0 },
     { x: 115.46, y: 0 },
     { x: 57.73, y: 100 },
   ].map((coord) => ({
-    x: coord.x * scale + offset[0],
-    y: coord.y * scale + offset[1],
+    x: coord.x * scale + offset.x,
+    y: coord.y * scale + offset.y,
   }));
   let midpoints = [];
   for (const point of points) {
@@ -26,7 +26,7 @@ function TriangleSelector() {
 
   return (
     <Triangle points={points} midpoints={midpoints}>
-      <Selector points={points} midpoints={midpoints} />
+      <Selector points={points} offset={offset} />
     </Triangle>
   );
 }
