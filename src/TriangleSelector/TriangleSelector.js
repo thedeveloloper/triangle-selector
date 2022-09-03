@@ -1,11 +1,11 @@
 import Selector from "./Selector";
-import "./TriangleSelector.css";
+import Triangle from "./Triangle";
 
 function TriangleSelector() {
   return (
-    <>
+    <Triangle>
       <Selector />
-    </>
+    </Triangle>
   );
 }
 

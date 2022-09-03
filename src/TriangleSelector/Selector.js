@@ -1,55 +1,61 @@
+import { useRef, useState } from "react";
 import "./Selector.css";
 
 function Selector() {
-  function makeDraggable(event) {
-    const svg = event.target;
-    svg.addEventListener("mousedown", startDrag);
-    svg.addEventListener("mousemove", drag);
-    svg.addEventListener("mouseup", endDrag);
-    svg.addEventListener("mouseleave", endDrag);
+  const [position, setPosition] = useState({ x: 50, y: 50, coords: {} });
 
-    let selectedElement, offset;
+  const offset = [100, 125];
 
-    function getMousePosition(event) {
-      const CTM = svg.getScreenCTM();
-      return {
-        x: (event.clientX - CTM.e) / CTM.a,
-        y: (event.clientY - CTM.f) / CTM.d,
+  const handleMouseMove = useRef((e) => {
+    setPosition((position) => {
+      const xDiff = position.coords.x - e.pageX;
+      const yDiff = position.coords.y - e.pageY;
+      const mouseLocation = {
+        x: position.x - xDiff,
+        y: position.y - yDiff,
+        coords: {
+          x: e.pageX,
+          y: e.pageY,
+        },
+        xOffset: position.x - xDiff - offset[0],
+        yOffset: position.y - yDiff - offset[1],
       };
-    }
+      console.log(mouseLocation);
+      return mouseLocation;
+    });
+  });
 
-    function startDrag(event) {
-      if (event.target.classList.contains("draggable")) {
-        selectedElement = event.target;
-        offset = getMousePosition(event);
-        offset.x -= parseFloat(selectedElement.getAttributeNS(null, "x"));
-        offset.y -= parseFloat(selectedElement.getAttributeNS(null, "y"));
-      }
-    }
+  const handleMouseDown = (e) => {
+    const pageX = e.pageX;
+    const pageY = e.pageY;
+    setPosition((position) =>
+      Object.assign({}, position, {
+        coords: {
+          x: pageX,
+          y: pageY,
+        },
+      })
+    );
+    document.addEventListener("mousemove", handleMouseMove.current);
+  };
 
-    function drag(event) {
-      if (selectedElement) {
-        event.preventDefault();
-        const coord = getMousePosition(event);
-        selectedElement.setAttributeNS(null, "x", coord.x - offset.x);
-        selectedElement.setAttributeNS(null, "y", coord.y - offset.y);
-      }
-    }
-
-    function endDrag(event) {
-      selectedElement = null;
-    }
-  }
+  const handleMouseUp = () => {
+    document.removeEventListener("mousemove", handleMouseMove.current);
+    setPosition((position) => Object.assign({}, position, { coords: {} }));
+  };
 
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 30 20"
-      onLoad={makeDraggable}
-    >
-      <rect x="0" y="0" width="30" height="20" fill="#fafafa" />
-      <rect x="4" y="5" width="8" height="10" fill="#007bff" />
-      <rect x="18" y="5" width="8" height="10" fill="#888" />
+    <svg>
+      <circle
+        cx={position.x}
+        cy={position.y}
+        r={25}
+        fill="grey"
+        stroke="grey"
+        strokeWidth="1"
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+      />
     </svg>
   );
 }
