@@ -4,7 +4,7 @@ function App() {
   return (
     <div
       style={{
-        backgroundColor: "#3B3B5F",
+        backgroundColor: "#36393f",
         height: "100vh",
         textAlign: "center",
       }}
