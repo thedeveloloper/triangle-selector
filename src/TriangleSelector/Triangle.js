@@ -20,6 +20,7 @@ function Triangle({ children, ...props }) {
         d={`M ${points
           .map((coord) => Object.values(coord).join(","))
           .join(" ")} z`}
+        fill="none"
       />
 
       <text
