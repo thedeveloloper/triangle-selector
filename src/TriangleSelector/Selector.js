@@ -6,7 +6,7 @@ import { TriangleSelectorContext } from "./TriangleSelectorContext";
 function Selector({ ...props }) {
   const { points, offset } = props;
 
-  const { setValues } = useContext(TriangleSelectorContext);
+  const { values, setValues } = useContext(TriangleSelectorContext);
 
   const [position, setPosition] = useState({
     x: offset.x,
@@ -64,15 +64,29 @@ function Selector({ ...props }) {
     setPosition((position) => Object.assign({}, position, { coords: {} }));
   };
 
+  function getSelectorColor() {
+    if (!pointInTriangle(...points, position)) {
+      return { fill: "red", stroke: "#F5E8FF" };
+    }
+    const { a, b, c } = values;
+    if (a >= b && a >= c) {
+      return { fill: "transparent", stroke: "#00B3F5" };
+    } else if (b >= a && b >= c) {
+      return { fill: "transparent", stroke: "#F5184A" };
+    } else {
+      return { fill: "transparent", stroke: "#F5E818" };
+    }
+  }
+
   return (
     <svg>
       <circle
         cx={position.x}
         cy={position.y}
-        r={15}
-        fill={pointInTriangle(...points, position) ? "green" : "red"}
-        stroke="grey"
-        strokeWidth="1"
+        r={10}
+        fill={getSelectorColor().fill}
+        stroke={getSelectorColor().stroke}
+        strokeWidth="2"
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
       />

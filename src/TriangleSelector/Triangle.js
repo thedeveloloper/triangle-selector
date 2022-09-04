@@ -7,12 +7,10 @@ function Triangle({ children, ...props }) {
 
   const { values } = useContext(TriangleSelectorContext);
 
-  console.log(values);
-
   return (
     <svg
       style={{
-        border: "1px solid black ",
+        backgroundColor: "#3B3B5F",
       }}
       width="750"
       height="750"
@@ -28,7 +26,7 @@ function Triangle({ children, ...props }) {
         x={points[2].x - 24}
         y={points[2].y + 40}
         fontSize="3em"
-        style={{ fill: "red" }}
+        style={{ fill: "#00B3F5", textAlign: "center" }}
       >
         {values.a}
       </text>
@@ -36,7 +34,7 @@ function Triangle({ children, ...props }) {
         x={points[0].x - 48}
         y={points[0].y - 10}
         fontSize="3em"
-        style={{ fill: "red" }}
+        style={{ fill: "#F5184A", textAlign: "center" }}
       >
         {values.b}
       </text>
@@ -44,7 +42,7 @@ function Triangle({ children, ...props }) {
         x={points[1].x + 5}
         y={points[1].y - 5}
         fontSize="3em"
-        style={{ fill: "red" }}
+        style={{ fill: "#F5E818", textAlign: "center" }}
       >
         {values.c}
       </text>
@@ -56,7 +54,7 @@ function Triangle({ children, ...props }) {
           y1={points[i].y}
           x2={midpoints[(i + 1) % 3].x}
           y2={midpoints[(i + 1) % 3].y}
-          style={{ stroke: "grey", strokeWidth: 0.5 }}
+          style={{ stroke: "#F5E8FF", strokeWidth: 0.5 }}
         />
       ))}
       {children}
