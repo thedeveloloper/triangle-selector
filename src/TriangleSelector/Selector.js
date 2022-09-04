@@ -70,7 +70,7 @@ function Selector({ ...props }) {
         cx={position.x}
         cy={position.y}
         r={15}
-        fill="grey"
+        fill={pointInTriangle(...points, position) ? "green" : "red"}
         stroke="grey"
         strokeWidth="1"
         onMouseDown={handleMouseDown}
