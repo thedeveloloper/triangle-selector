@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/triangle-selector/static/css/main.0106bce3.css",
-    "main.js": "/triangle-selector/static/js/main.cf23257a.js",
+    "main.css": "/triangle-selector/static/css/main.5447c0ec.css",
+    "main.js": "/triangle-selector/static/js/main.c3b068ea.js",
     "index.html": "/triangle-selector/index.html",
-    "main.0106bce3.css.map": "/triangle-selector/static/css/main.0106bce3.css.map",
-    "main.cf23257a.js.map": "/triangle-selector/static/js/main.cf23257a.js.map"
+    "main.5447c0ec.css.map": "/triangle-selector/static/css/main.5447c0ec.css.map",
+    "main.c3b068ea.js.map": "/triangle-selector/static/js/main.c3b068ea.js.map"
   },
   "entrypoints": [
-    "static/css/main.0106bce3.css",
-    "static/js/main.cf23257a.js"
+    "static/css/main.5447c0ec.css",
+    "static/js/main.c3b068ea.js"
   ]
 }
