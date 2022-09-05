@@ -1,6 +1,6 @@
-const calculateMidpoint = (a, b) => {
+function calculateMidpoint(a, b) {
   return [(a.x + b.x) / 2, (a.y + b.y) / 2];
-};
+}
 
 function pointInTriangle(a, b, c, p) {
   const s1 = c.y - a.y;
