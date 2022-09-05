@@ -29,17 +29,20 @@ function Selector({ ...props }) {
         yOffset: position.y - yDiff - offset.y,
       };
 
-      setValues({
-        a: Math.round(
-          sigmoid(distanceToLine(points[0], points[1], position), 0, 500) * 100
-        ),
-        b: Math.round(
-          sigmoid(distanceToLine(points[1], points[2], position), 0, 500) * 100
-        ),
-        c: Math.round(
-          sigmoid(distanceToLine(points[2], points[0], position), 0, 500) * 100
-        ),
-      });
+      const newValues = { a: 0, b: 0, c: 0 };
+      for (const [index, [key, _value]] of Object.entries(
+        Object.entries(newValues)
+      )) {
+        newValues[key] = Math.round(
+          sigmoid(
+            distanceToLine(points[index], points[(index + 1) % 3], position),
+            0,
+            500
+          ) * 100
+        );
+      }
+
+      setValues(newValues);
 
       return mouseLocation;
     });
