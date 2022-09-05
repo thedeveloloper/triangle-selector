@@ -30,9 +30,7 @@ function Selector({ ...props }) {
       };
 
       const newValues = { a: 0, b: 0, c: 0 };
-      for (const [index, [key, _value]] of Object.entries(
-        Object.entries(newValues)
-      )) {
+      for (const [index, [key]] of Object.entries(Object.entries(newValues))) {
         newValues[key] = Math.round(
           sigmoid(
             distanceToLine(points[index], points[(index + 1) % 3], position),
