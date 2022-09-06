@@ -14,31 +14,40 @@ function Selector({ ...props }) {
     coords: {},
   });
 
+  const [prevPosition, setPrevPosition] = useState(position);
+
   const handleMouseMove = useRef((e) => {
-    setPosition((position) => {
-      const xDiff = position.coords.x - e.pageX;
-      const yDiff = position.coords.y - e.pageY;
+    setPosition((pos) => {
+      const xDiff = pos.coords.x - e.pageX;
+      const yDiff = pos.coords.y - e.pageY;
       const mouseLocation = {
-        x: position.x - xDiff,
-        y: position.y - yDiff,
+        x: pos.x - xDiff,
+        y: pos.y - yDiff,
         coords: {
           x: e.pageX,
           y: e.pageY,
         },
-        xOffset: position.x - xDiff - offset.x,
-        yOffset: position.y - yDiff - offset.y,
+        xOffset: pos.x - xDiff - offset.x,
+        yOffset: pos.y - yDiff - offset.y,
       };
 
       const newValues = { a: 0, b: 0, c: 0 };
       for (const [index, [key]] of Object.entries(Object.entries(newValues))) {
         newValues[key] = Math.round(
           sigmoid(
-            distanceToLine(points[index], points[(index + 1) % 3], position),
+            distanceToLine(points[index], points[(index + 1) % 3], pos),
             0,
             500
           ) * 100
         );
       }
+
+      setPrevPosition(pos);
+      console.log("position", position, "pos", pos, "prev", prevPosition);
+      // if (!pointInTriangle(...points, pos)) {
+      //   document.removeEventListener("mousemove", handleMouseMove.current);
+      //   setPosition(prevPosition);
+      // }
 
       setValues(newValues);
 
